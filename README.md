@@ -18,9 +18,14 @@ See pdf file, 'Klasik et al. - 2018 - Out of the Education Desert How Limited Lo
 ## Clean Data
 The clean data folder has any processed version of the 'Raw Data', such as filtered and merged datasets. 
 
+-   Shape_EducationDesertsCBSA _Shapefiles created after combining school and college data with the CBSA data.
+
 ## Code
 The python code used to process and analyze the data. 
 
+-   DataCleanUp.py _data cleaning code_
+
+-   DataExploration.py _preliminary data exploration_
 
 ## Figures
 The figure images that will be used for presentations etc.
