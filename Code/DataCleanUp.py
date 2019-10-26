@@ -99,10 +99,6 @@ Combined1.head()
 
 # Missing data?
 
-
-
-# PCA preliminary
-
 # Separating out the features
 x = df.loc[:, features].values
 
