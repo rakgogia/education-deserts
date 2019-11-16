@@ -14,8 +14,8 @@ from shapely.geometry import Point
 
 # Lets start off with some SUPER simple maps.
 
-SchoolNumber=pd.read_csv('~/Desktop/MDST/education-deserts/RawData/Colleges_and_Universities.csv')
-EdDesertCBSA=gpd.read_file('/Users/sara/Desktop/MDST/education-deserts/CleanData/Shape_EducationDesertsCBSA/EducationDesertsByCBSA.shp')
+SchoolNumber=pd.read_csv("../RawData/Colleges_and_Universities.csv")
+EdDesertCBSA=gpd.read_file('../CleanData/Shape_EducationDesertsCBSA/EducationDesertsByCBSA.shp')
 
 # Make school number a geo data frame to plot and work with
 
@@ -55,15 +55,15 @@ DesertSum
 DesertSum.plot(kind='bar')
 plt.xlabel("Education desert binary", labelpad=14)
 plt.ylabel("Counts", labelpad=14)
-plt.title("Count of Education Deserts by CBSA", y=1.02);
+plt.title("Count of Education Deserts by CBSA", y=1.02)
 plt.show()
 
 
 # Read in income data
-GDP=pd.read_csv('~/Desktop/MDST/education-deserts/CleanData/gdp_metro0918.csv')
+GDP=pd.read_csv('../CleanData/gdp_metro0918.csv')
 
 # Read GEO id information
-IDinfo=pd.read_csv('~/Desktop/MDST/education-deserts/CleanData/Core_GEO_ID_2017.csv', encoding = "ISO-8859-1")
+IDinfo=pd.read_csv('../CleanData/Core_GEO_ID_2017.csv', encoding = "ISO-8859-1")
 IDinfo.head()
 IDinfo.columns.values
 GDP.head()
@@ -104,29 +104,34 @@ plt.show()
 
 # Plot education deserts and NON education deserts
 
-fig, ax = plt.subplots(figsize=(14, 6))
 
-fig=EdDesertCBSA_2[EdDesertCBSA_2.EducationD==0].plot(color="yellow",ax=ax) # Plot deserts yellow
-EdDesertCBSA_2[EdDesertCBSA_2.EducationD==1].plot(color="lightblue",ax=ax) # Plot non deserts blue
+fig, ax = plt.subplots(figsize=(14, 6))
+fig=EdDesertCBSA_2.plot(column="EducationD", ax=ax, categorical=True, legend=True, label=["Desert", "Non-desert"]) # Plot deserts yellow
+leg = ax.get_legend()
+leg.get_texts()[0].set_text('Desert')
+leg.get_texts()[1].set_text('Non-Desert')
+# leg.set_bbox_to_anchor((0, 0))
 ax.set_title('Education Deserts in the US Based on CBSA',fontdict={'fontsize': '25','fontweight': '3'}) # add title
+ax.set_axis_off()
 ax.annotate('Data source: shape.file from TIGER.gov',xy=(0.1, .08),  xycoords='figure fraction', horizontalalignment='left', verticalalignment='top', fontsize=12, color='black') # add data source
 
 plt.show()
 
+
 # Pairwise correlation between variables
 # Seaborn visualization library
-import seaborn as sns# Create the default pairplot
+# import seaborn as sns# Create the default pairplot
 
-Subset=pd.DataFrame(EdDesertCBSA_2[['PerChangeGDP', 'NatResMining', 'Constr', 'DurGoManu','NonGoodManu', 'Trade', 'TransUtil','EducationDesert']])
+# Subset=pd.DataFrame(EdDesertCBSA_2[['PerChangeGDP', 'NatResMining', 'Constr', 'DurGoManu','NonGoodManu', 'Trade', 'TransUtil','EducationDesert']])
        
-sns.pairplot(Subset,hue='EducationDesert')
+# sns.pairplot(Subset,hue='EducationDesert')
 
-plt.show()
+# plt.show()
 
 
 
 # Plot map chloropleth by GDP and then school points on top.
-StatesShape = gpd.read_file("/Users/sara/Desktop/MDST/education-deserts/CleanData/states_21basic/states.shp")
+StatesShape = gpd.read_file("../CleanData/states_21basic/states.shp")
 StatesShape.head()
 
 fig, ax = plt.subplots(figsize=(14, 6))

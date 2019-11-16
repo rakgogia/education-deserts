@@ -9,11 +9,11 @@ import os
 ### Combine shape files and school location information
 
 # Read shape file
-CBSA=gpd.read_file("/Users/sara/Desktop/MDST/education-deserts/RawData/tl_2017_us_cbsa/tl_2017_us_cbsa.shp")
+CBSA=gpd.read_file("../RawData/tl_2017_us_cbsa/tl_2017_us_cbsa.shp")
 CBSA.head() # Preview data
 
 # Read school info data
-SchoolNumber=pd.read_csv('~/Desktop/MDST/education-deserts/RawData/Colleges_and_Universities.csv')
+SchoolNumber=pd.read_csv('../RawData/Colleges_and_Universities.csv')
 SchoolNumber.head() # Preview data
 
 # Transform SchoolNumber data as a GeoPandas Dataframe
@@ -68,14 +68,14 @@ polygons['EducationDesert']= polygons.SchoolNumber.apply(lambda set_: 1 if set_>
 # Save the updated polygon data set including information of our defenition of education desert in the clean data folder.
 import os
 import fiona; fiona.supported_drivers
-os.chdir('/Users/sara/Desktop/MDST/education-deserts/CleanData') # Set to your own directory!
+os.chdir('CleanData') # Set to your own directory!
 polygons.to_file('EducationDesertsByCBSA.shp')
 
 ### ELS data sets (in progress!)
 
-Data1=pd.read_csv("~/Desktop/MDST/EducationDeserts_MDST/RawData/ELS_2002-12_PETS_v1_0_Other_CSV_Datasets/els_02_12_byf1sch_v1_0.csv")
-Data2=pd.read_csv("~/Desktop/MDST/EducationDeserts_MDST/RawData/ELS_2002-12_PETS_v1_0_Other_CSV_Datasets/els_02_12_f2inst_v1_0.csv")
-Data3=pd.read_csv("~/Desktop/MDST/EducationDeserts_MDST/RawData/ELS_2002-12_PETS_v1_0_Other_CSV_Datasets/els_02_12_f3inst_v1_0.csv")
+Data1=pd.read_csv("../RawData/ELS_2002-12_PETS_v1_0_Other_CSV_Datasets/els_02_12_byf1sch_v1_0.csv")
+Data2=pd.read_csv("../RawData/ELS_2002-12_PETS_v1_0_Other_CSV_Datasets/els_02_12_f2inst_v1_0.csv")
+Data3=pd.read_csv("../RawData/ELS_2002-12_PETS_v1_0_Other_CSV_Datasets/els_02_12_f3inst_v1_0.csv")
 
 Data1.head()
 Data1.columns.values
